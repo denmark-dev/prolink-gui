@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f3f4f6"/>
+  <rect x="40" y="30" width="120" height="140" rx="10" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+  <circle cx="100" cy="100" r="30" fill="#9ca3af"/>
+  <path d="M 70 100 Q 70 70, 100 70 Q 130 70, 130 100" stroke="#6b7280" stroke-width="3" fill="none"/>
+  <circle cx="85" cy="90" r="3" fill="#6b7280"/>
+  <circle cx="115" cy="90" r="3" fill="#6b7280"/>
+  <text x="100" y="185" font-family="Arial, sans-serif" font-size="14" fill="#6b7280" text-anchor="middle">Device</text>
+</svg>

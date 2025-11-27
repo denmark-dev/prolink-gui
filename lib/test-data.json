@@ -1,0 +1,66 @@
+{
+  "description": "Example JSON response from Prolink DL-7202 router API",
+  "endpoint": "http://192.168.1.1/reqproc/proc_get?isTest=false&cmd=sta_info1,sta_info2,sta_info3,sta_info4,sta_info5,sta_info6&multi_data=1",
+  "example_response": {
+    "sta_info1": "00:1A:2B:3C:4D:5E,iPhone-14-Pro,1024000000,512000000,-45,192.168.1.100",
+    "sta_info2": "00:1A:2B:3C:4D:5F,MacBook-Pro,2048000000,1024000000,-38,192.168.1.101",
+    "sta_info3": "00:1A:2B:3C:4D:60,iPad-Air,512000000,256000000,-52,192.168.1.102",
+    "sta_info4": "none",
+    "sta_info5": "none",
+    "sta_info6": "none"
+  },
+  "field_descriptions": {
+    "mac": "Device MAC address (field 0)",
+    "hostname": "Device hostname (field 1)",
+    "rx": "Bytes received by device (field 2)",
+    "tx": "Bytes transmitted by device (field 3)",
+    "rssi": "Signal strength in dBm (field 4)",
+    "ip": "Device IP address (field 5)"
+  },
+  "firestore_schema": {
+    "collections": {
+      "devices": {
+        "document_id": "MAC address",
+        "fields": {
+          "mac": "string",
+          "hostname": "string",
+          "deviceType": "string",
+          "deviceImage": "string",
+          "firstSeen": "timestamp",
+          "lastSeen": "timestamp"
+        },
+        "subcollections": {
+          "current": {
+            "document_id": "latest",
+            "fields": {
+              "mac": "string",
+              "hostname": "string",
+              "rx": "number",
+              "tx": "number",
+              "rssi": "number",
+              "downloadSpeed": "number (bytes/sec)",
+              "uploadSpeed": "number (bytes/sec)",
+              "ping": "number (ms)",
+              "lastUpdate": "timestamp",
+              "deviceType": "string",
+              "deviceImage": "string",
+              "ip": "string"
+            }
+          },
+          "usage": {
+            "document_id": "auto-generated",
+            "fields": {
+              "timestamp": "timestamp",
+              "rx": "number",
+              "tx": "number",
+              "downloadSpeed": "number",
+              "uploadSpeed": "number",
+              "ping": "number",
+              "rssi": "number"
+            }
+          }
+        }
+      }
+    }
+  }
+}

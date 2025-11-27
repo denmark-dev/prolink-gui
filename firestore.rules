@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to device documents
+    match /devices/{mac} {
+      allow read, write: if true;
+      
+      // Subcollections under devices
+      match /current/{document} {
+        allow read, write: if true;
+      }
+      
+      match /usage/{usageDoc} {
+        allow read, write: if true;
+      }
+    }
+    
+    // Allow read/write access to hotspot usage
+    match /hotspot_usage/{date} {
+      allow read, write: if true;
+    }
+    
+    // Allow read/write access to global stats
+    match /stats/{document} {
+      allow read, write: if true;
+    }
+  }
+}
