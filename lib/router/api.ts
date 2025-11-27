@@ -1,7 +1,5 @@
 import { RouterDevice } from '../types';
-
-// Use Next.js API route as proxy to avoid CORS issues
-const API_ENDPOINT = '/api/router';
+import { fetchFromRouter } from '../utils/router-fetch';
 
 export interface StationInfo {
   connect_time: number;
@@ -27,24 +25,15 @@ export interface RouterResponse {
 }
 
 /**
- * Fetch connected devices from the Prolink router via Next.js API proxy
+ * Fetch connected devices from the Prolink router
  */
 export async function fetchRouterDevices(): Promise<RouterDevice[]> {
   try {
-    const response = await fetch(API_ENDPOINT, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-      },
-      cache: 'no-store',
+    const data: RouterResponse = await fetchFromRouter('/reqproc/proc_get', {
+      isTest: 'false',
+      cmd: 'sta_info1,sta_info2,sta_info3,sta_info4,sta_info5,sta_info6,station_list',
+      multi_data: '1',
     });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || `API error: ${response.status}`);
-    }
-
-    const data: RouterResponse = await response.json();
     
     // Check for error in response
     if (data.error) {
@@ -204,15 +193,16 @@ export function calculateSpeed(
 }
 
 /**
- * Measure ping using fetch timing to the API endpoint
+ * Measure ping using fetch timing to the router
  */
-export async function measurePing(url: string = API_ENDPOINT): Promise<number> {
+export async function measurePing(): Promise<number> {
   try {
     const startTime = performance.now();
     
-    await fetch(url, {
-      method: 'GET',
-      cache: 'no-store',
+    await fetchFromRouter('/reqproc/proc_get', {
+      isTest: 'false',
+      cmd: 'wa_inner_version',
+      multi_data: '1',
     });
     
     const endTime = performance.now();

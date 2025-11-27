@@ -2,35 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import { SystemStatus } from '../types';
+import { fetchFromRouter } from '../utils/router-fetch';
 
 export function useSystemStatus(refreshInterval: number = 5000) {
   const [status, setStatus] = useState<SystemStatus | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-
     const fetchStatus = async () => {
       try {
-        const response = await fetch('/api/router', {
-          cache: 'no-store',
+        const data = await fetchFromRouter('/reqproc/proc_get', {
+          isTest: 'false',
+          cmd: 'wa_inner_version,cr_version,RealTime_time,battery_charging,battery_vol_percent,battery_pers,spn_name_data,network_provider,signalbar,network_type,rssi,rscp,lte_rsrp,Z5g_snr,Z5g_rsrp,wan_ipaddr,ipv6_wan_ipaddr,ipv6_pdp_type,ppp_status,EX_SSID1,sta_ip_status,EX_wifi_profile,m_netselect_contents,loginfo,new_version_state,current_upgrade_state,is_mandatory',
+          multi_data: '1',
         });
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch system status');
-        }
-
-        const data = await response.json();
-        
-        if (mounted && data.system_status) {
-          setStatus(data.system_status);
+        if (data) {
+          setStatus(data);
           setLoading(false);
         }
       } catch (error) {
         console.error('[useSystemStatus] Error:', error);
-        if (mounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
 
@@ -41,7 +34,6 @@ export function useSystemStatus(refreshInterval: number = 5000) {
     const intervalId = setInterval(fetchStatus, refreshInterval);
 
     return () => {
-      mounted = false;
       clearInterval(intervalId);
     };
   }, [refreshInterval]);
