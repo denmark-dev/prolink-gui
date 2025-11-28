@@ -169,7 +169,7 @@ export function SpeedTestDialog({ isOpen, onClose }: SpeedTestDialogProps) {
           <div className="text-center">
             <div className="mb-4">
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Current Speed</p>
-              <p className="text-6xl font-bold text-yellow-600 dark:text-yellow-400">
+              <p className="text-4xl md:text-5xl font-bold text-yellow-600 dark:text-yellow-400">
                 {formatSpeed(currentSpeed)}
               </p>
             </div>
@@ -189,14 +189,14 @@ export function SpeedTestDialog({ isOpen, onClose }: SpeedTestDialogProps) {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
             <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Average Speed</p>
-              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-1">Average Speed</p>
+              <p className="text-lg md:text-xl font-bold text-blue-600 dark:text-blue-400">
                 {formatSpeed(averageSpeed)}
               </p>
             </div>
             <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Max Speed</p>
-              <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+              <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-1">Max Speed</p>
+              <p className="text-lg md:text-xl font-bold text-green-600 dark:text-green-400">
                 {formatSpeed(maxSpeed)}
               </p>
             </div>

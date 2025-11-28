@@ -94,6 +94,7 @@ export interface SystemStatus {
   network_type?: string;
   sub_network_type?: string;
   realtime_time?: string; // Router uptime in seconds (e.g., "39511")
+  wan_ipaddr?: string; // WAN IP address
 }
 
 export interface BatterySession {

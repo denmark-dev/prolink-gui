@@ -43,9 +43,9 @@ export async function fetchFromRouter(
   }
   
   // In development, use API route
-  const apiEndpoint = endpoint.replace('/reqproc/proc_get', '/api/router');
+  console.log('[router-fetch] Using API route in development mode');
   
-  const response = await fetch(apiEndpoint, {
+  const response = await fetch('/api/router', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -58,7 +58,9 @@ export async function fetchFromRouter(
     throw new Error(errorData.error || `API error: ${response.status}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+  console.log('[router-fetch] API route response:', data);
+  return data;
 }
 
 /**

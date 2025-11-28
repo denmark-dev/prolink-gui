@@ -111,14 +111,19 @@ export default function Dashboard() {
                 alt="Prolink"
                 width={200}
                 height={60}
-                className="object-contain"
+                className="object-contain -ml-3.5"
                 priority
                 unoptimized
                 key={Date.now()}
               />
-              <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                Model: PRT7011L
-              </p>
+              <div className="space-y-1">
+                <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  Model: PRT7011L
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                  IP: {systemStatus?.wan_ipaddr || '192.168.1.1'}
+                </p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               {systemStatus && (systemStatus.spn_name_data || systemStatus.network_provider) && (
@@ -179,8 +184,8 @@ export default function Dashboard() {
               isToolsExpanded ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
             }`}
           >
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <CardContent className="px-4 md:px-6 pt-6 pb-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 {/* Pinger Tool */}
                 <button
                   onClick={() => setIsPingerOpen(true)}
@@ -236,25 +241,25 @@ export default function Dashboard() {
         {/* Network Statistics - Main Card */}
         <Card className="mb-8 border-2 border-blue-500 dark:border-blue-600 shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl">Network Statistics</CardTitle>
+            <CardTitle className="text-xl md:text-2xl">Network Statistics</CardTitle>
           </CardHeader>
-          <CardContent className="p-8">
-            <div className="grid grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
-                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3">Avg Ping</p>
-                <p className="text-2xl md:text-4xl font-bold text-blue-600 dark:text-blue-400">
+          <CardContent className="p-4 md:p-8">
+            <div className="grid grid-cols-3 gap-3 md:gap-6">
+              <div className="text-center p-3 md:p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <p className="text-xs md:text-base text-gray-600 dark:text-gray-400 mb-2 md:mb-3">Avg<br className="md:hidden" /> Ping</p>
+                <p className="text-lg md:text-4xl font-bold text-blue-600 dark:text-blue-400 break-words">
                   {avgPing > 0 ? `${avgPing}ms` : 'N/A'}
                 </p>
               </div>
-              <div className="text-center p-6 bg-green-50 dark:bg-green-900/20 rounded-xl">
-                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3">Download</p>
-                <p className="text-2xl md:text-4xl font-bold text-green-600 dark:text-green-400">
+              <div className="text-center p-3 md:p-6 bg-green-50 dark:bg-green-900/20 rounded-xl">
+                <p className="text-xs md:text-base text-gray-600 dark:text-gray-400 mb-2 md:mb-3">Download</p>
+                <p className="text-lg md:text-4xl font-bold text-green-600 dark:text-green-400 break-words leading-tight">
                   {formatSpeed(totalDownloadSpeed)}
                 </p>
               </div>
-              <div className="text-center p-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
-                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-3">Upload</p>
-                <p className="text-2xl md:text-4xl font-bold text-purple-600 dark:text-purple-400">
+              <div className="text-center p-3 md:p-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl">
+                <p className="text-xs md:text-base text-gray-600 dark:text-gray-400 mb-2 md:mb-3">Upload</p>
+                <p className="text-lg md:text-4xl font-bold text-purple-600 dark:text-purple-400 break-words leading-tight">
                   {formatSpeed(totalUploadSpeed)}
                 </p>
               </div>

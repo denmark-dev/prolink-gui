@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withPWA from "next-pwa";
 
 const nextConfig: NextConfig = {
   images: {
@@ -13,4 +14,22 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+  runtimeCaching: [
+    {
+      urlPattern: /^http:\/\/192\.168\.1\.1\/.*/i,
+      handler: "NetworkFirst",
+      options: {
+        cacheName: "router-api",
+        expiration: {
+          maxEntries: 32,
+          maxAgeSeconds: 60, // 1 minute
+        },
+      },
+    },
+  ],
+})(nextConfig);

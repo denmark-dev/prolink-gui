@@ -8,7 +8,7 @@ const ROUTER_PORT = 80;
 const STA_INFO_PATH = '/reqproc/proc_get?isTest=false&cmd=sta_info1%2Csta_info2%2Csta_info3%2Csta_info4%2Csta_info5%2Csta_info6&multi_data=1';
 const STATION_LIST_PATH = '/reqproc/proc_get?isTest=false&cmd=station_list&multi_data=1';
 const HOSTNAME_LIST_PATH = '/reqproc/proc_get?isTest=false&cmd=hostNameList';
-const SYSTEM_STATUS_PATH = '/reqproc/proc_get?multi_data=1&isTest=false&cmd=network_provider%2Cspn_name_data%2Cbattery_charging%2Cbattery_vol_percent%2Cbattery_pers%2Csignalbar%2Cnetwork_type%2Csub_network_type%2Crealtime_time';
+const SYSTEM_STATUS_PATH = '/reqproc/proc_get?multi_data=1&isTest=false&cmd=network_provider%2Cspn_name_data%2Cbattery_charging%2Cbattery_vol_percent%2Cbattery_pers%2Csignalbar%2Cnetwork_type%2Csub_network_type%2Crealtime_time%2Cwan_ipaddr';
 const SMS_PATH = '/reqproc/proc_get?isTest=false&cmd=sms_data_total&page=0&data_per_page=500&mem_store=1&tags=10&order_by=order+by+id+desc';
 const LOGIN_PATH = '/reqproc/proc_post';
 

@@ -11,6 +11,19 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Prolink Hotspot Dashboard",
   description: "Monitor and manage your Prolink mobile hotspot",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Prolink",
+  },
+  themeColor: "#3b82f6",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
@@ -20,6 +33,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body
         className={`${poppins.variable} font-sans antialiased`}
       >

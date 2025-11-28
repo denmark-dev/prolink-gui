@@ -1,0 +1,41 @@
+{
+  "name": "Prolink Hotspot Dashboard",
+  "short_name": "Prolink",
+  "description": "Monitor and manage your Prolink PRT7011L mobile hotspot",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e293b",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Network Pinger",
+      "short_name": "Ping",
+      "description": "Wake up hotspot connection",
+      "url": "/?tool=pinger",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Speed Test",
+      "short_name": "Speed",
+      "description": "Test download speed",
+      "url": "/?tool=speedtest",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
