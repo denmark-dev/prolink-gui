@@ -16,7 +16,7 @@ import { formatBytes, formatSpeed } from '@/lib/utils/format';
 import { formatDuration } from '@/lib/utils/format-duration';
 import { parseUptime } from '@/lib/utils/parse-uptime';
 import { Wifi, Activity, HardDrive, Calendar, TrendingUp, Battery, BatteryCharging, Clock, Zap, Power, ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PingerDialog } from '@/components/PingerDialog';
 import { SpeedTestDialog } from '@/components/SpeedTestDialog';
 import { RebootDialog } from '@/components/RebootDialog';
@@ -28,6 +28,41 @@ export default function Dashboard() {
   const [isSpeedTestOpen, setIsSpeedTestOpen] = useState(false);
   const [isRebootOpen, setIsRebootOpen] = useState(false);
   const [isToolsExpanded, setIsToolsExpanded] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Detect dark mode from system preference
+  useEffect(() => {
+    const checkDarkMode = () => {
+      // Check both class-based and system preference
+      const hasClass = document.documentElement.classList.contains('dark');
+      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = hasClass || systemPreference;
+      
+      console.log('[Theme] Dark mode detected:', isDark);
+      console.log('[Theme] Has dark class:', hasClass);
+      console.log('[Theme] System preference:', systemPreference);
+      setIsDarkMode(isDark);
+    };
+    
+    checkDarkMode();
+    
+    // Watch for system preference changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => checkDarkMode();
+    mediaQuery.addEventListener('change', handleChange);
+    
+    // Watch for class changes (if theme toggle is added later)
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      observer.disconnect();
+    };
+  }, []);
   
   const { devices, loading, error, lastUpdate, refresh } = useRouterData({
     refreshInterval: 2000,
@@ -105,20 +140,30 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <div className="flex flex-col gap-2 mb-2">
-              <Image
-                src="/prolink.png"
-                alt="Prolink"
-                width={200}
-                height={60}
-                className="object-contain -ml-3.5"
-                priority
-                unoptimized
-                key={Date.now()}
-              />
+            <div className="flex flex-col gap-10 mb-2">
+              <div className="relative w-[200px] h-[60px] -ml-3.5">
+                <Image
+                  src="/prolink.png"
+                  alt="Prolink"
+                  width={200}
+                  height={60}
+                  className={`object-contain absolute inset-0 transition-opacity duration-300 ${isDarkMode ? 'opacity-100' : 'opacity-0'}`}
+                  priority
+                  unoptimized
+                />
+                <Image
+                  src="/prolink2.png"
+                  alt="Prolink"
+                  width={200}
+                  height={60}
+                  className={`object-contain absolute inset-0 transition-opacity duration-300 ${isDarkMode ? 'opacity-0' : 'opacity-100'}`}
+                  priority
+                  unoptimized
+                />
+              </div>
               <div className="space-y-1">
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                  Model: PRT7011L
+                  Model: DL-702
                 </p>
                 <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
                   IP: {systemStatus?.wan_ipaddr || '192.168.1.1'}

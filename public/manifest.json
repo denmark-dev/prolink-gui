@@ -28,14 +28,14 @@
       "short_name": "Ping",
       "description": "Wake up hotspot connection",
       "url": "/?tool=pinger",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/plink-logo.png", "sizes": "192x192" }]
     },
     {
       "name": "Speed Test",
       "short_name": "Speed",
       "description": "Test download speed",
       "url": "/?tool=speedtest",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/plink-logo.png", "sizes": "192x192" }]
     }
   ]
 }

@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Add empty turbopack config to silence webpack/turbopack warning
+  turbopack: {},
 };
 
 export default withPWA({
@@ -32,4 +34,4 @@ export default withPWA({
       },
     },
   ],
-})(nextConfig);
+})(nextConfig) as NextConfig;
