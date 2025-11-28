@@ -174,12 +174,12 @@ export function PingerDialog({ isOpen, onClose }: PingerDialogProps) {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Logs
             </label>
-            <div className="bg-gray-900 dark:bg-black rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm">
+            <div className="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm border border-gray-300 dark:border-gray-700">
               {logs.length === 0 ? (
-                <p className="text-gray-500">No logs yet. Click "Start Ping" to begin.</p>
+                <p className="text-gray-500 dark:text-gray-400">No logs yet. Click "Start Ping" to begin.</p>
               ) : (
                 logs.map((log, index) => (
-                  <div key={index} className="text-green-400 mb-1">
+                  <div key={index} className="text-green-600 dark:text-green-400 mb-1">
                     {log}
                   </div>
                 ))
